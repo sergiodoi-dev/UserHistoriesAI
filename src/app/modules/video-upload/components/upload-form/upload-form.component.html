@@ -1,0 +1,40 @@
+<mat-card class="upload-card">
+  <mat-card-header>
+    <mat-card-title>Subir nuevo video</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+      <!-- File Input -->
+      <div class="file-input-container">
+        <input type="file" accept="video/*" (change)="onFileSelected($event)" #fileInput hidden>
+
+        <span class="file-name" *ngIf="!uploadForm.get('videoFile')?.value">
+          Selecciona el video a subir
+        </span>
+
+        <span class="file-name" *ngIf="uploadForm.get('videoFile')?.value">
+          {{ uploadForm.get('videoFile')?.value.name }}
+          ({{ uploadForm.get('videoFile')?.value.size | fileSize }})
+        </span>
+
+        <button mat-raised-button color="primary" type="button" (click)="fileInput.click()">
+          <mat-icon>upload</mat-icon> Seleccionar video
+        </button>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="!uploadForm.valid || isUploading">
+          <mat-icon>code</mat-icon> Analizar
+        </button>
+      </div>
+
+      <!-- Progress Bar -->
+      <div *ngIf="isUploading" class="upload-progress">
+        <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+        <span class="progress-text">{{ progress }}%</span>
+      </div>
+
+      <!-- Submit Button -->
+
+    </form>
+  </mat-card-content>
+</mat-card>
