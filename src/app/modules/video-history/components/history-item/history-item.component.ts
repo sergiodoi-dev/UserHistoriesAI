@@ -47,8 +47,7 @@ export class HistoryItemComponent implements OnInit{
   showDescription(description: string): void {
     this.dialog.open(HistoryDetailComponent, {
       data: description,
-      width: '1200px',
-      panelClass: 'my-class'
+      maxWidth: '100%',
     });
   }
 

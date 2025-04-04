@@ -47,6 +47,7 @@ export class HistoryListComponent {
       },
       error: () => this.isLoading = false
     });
+    
   }
 
 
