@@ -21,7 +21,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   ],
   templateUrl: './history-item.component.html',
   styleUrl: './history-item.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HistoryItemComponent implements OnInit{
   readonly dialog = inject(MatDialog)
@@ -39,9 +38,14 @@ export class HistoryItemComponent implements OnInit{
   }
 
   getProgressItem() {
+    //long pulling
     this.videoService.getItem(this.historyItem.task_id).subscribe(response => {
       this.progressItem = response;
-    })
+    });
+  }
+
+  get showViewButton(): boolean {
+    return this.progressItem != undefined && this.progressItem.result != null;
   }
 
   showDescription(description: string): void {
@@ -50,5 +54,4 @@ export class HistoryItemComponent implements OnInit{
       maxWidth: '100%',
     });
   }
-
 }

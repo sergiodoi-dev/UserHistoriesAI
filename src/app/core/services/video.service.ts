@@ -1,6 +1,6 @@
 import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { interval, map, Observable, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, interval, map, Observable, of, switchMap, tap } from 'rxjs';
 
 export interface Task {
   task: string,
@@ -31,8 +31,12 @@ export interface ProgressItem {
 })
 export class VideoService {
   private apiUrl = 'https://humaker.api.areamovil.com.co/v1/task';
+  historyList: BehaviorSubject<HistoryItem[]>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.historyList = new BehaviorSubject<HistoryItem[]>([]);
+  }
+
 
   uploadVideo(file: File): Observable<Task> {
     const formData = new FormData();
@@ -42,7 +46,13 @@ export class VideoService {
   }
 
   getHistory(): Observable<HistoryItem[]> {
-    return this.http.get<HistoryItem[]>(`${this.apiUrl}/list`);
+    return this.http.get<HistoryItem[]>(`${this.apiUrl}/list`).pipe(
+      map(response => {
+        let sorted = response.sort((a, b) => new Date(b.creation_date).getTime() - new Date(a.creation_date).getTime());
+        this.historyList.next(sorted);
+        return sorted;
+      })
+    );
   }
 
   getItem(task_id: string): Observable<ProgressItem> {

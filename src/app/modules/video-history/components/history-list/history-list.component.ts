@@ -10,7 +10,6 @@ import { HistoryItemComponent } from "../history-item/history-item.component";
 @Component({
   selector: 'app-history-list',
   imports: [
-
     MatCardModule,
     MatPaginatorModule,
     MatToolbarModule,
@@ -34,6 +33,10 @@ export class HistoryListComponent {
   constructor(private videoService: VideoService) {}
 
   ngOnInit(): void {
+
+    this.videoService.historyList.subscribe(response => {
+      this.dataSource.data = response;
+    });
     this.loadHistory();
   }
 
@@ -41,13 +44,12 @@ export class HistoryListComponent {
     this.isLoading = true;
     this.videoService.getHistory().subscribe({
       next: (response) => {
-
         this.dataSource.data = response;
         this.isLoading = false;
       },
       error: () => this.isLoading = false
     });
-    
+
   }
 
 

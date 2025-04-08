@@ -29,8 +29,7 @@
 
       <!-- Progress Bar -->
       <div *ngIf="isUploading" class="upload-progress">
-        <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
-        <span class="progress-text">{{ progress }}%</span>
+        <mat-progress-bar mode="indeterminate" ></mat-progress-bar>
       </div>
 
       <!-- Submit Button -->

@@ -19,9 +19,7 @@ export class HistoryDetailComponent implements OnInit {
   constructor(private mdService: MarkdownService){}
 
   async ngOnInit()  {
-    console.log("Data: ", this.data);
-    this.markdown = this.mdService.parse(this.data).toString(); // Ya Chao nooooooooo jajaja
-
+    this.markdown = this.mdService.parse(this.data).toString();
   }
 
 }

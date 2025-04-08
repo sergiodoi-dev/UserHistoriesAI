@@ -60,7 +60,8 @@ export class UploadFormComponent {
       const { videoFile, description } = this.uploadForm.value;
 
       this.videoService.uploadVideo(videoFile).subscribe(response => {
-        console.log(response);
+        this.isUploading = false;
+        this.videoService.getHistory().subscribe();
       })
     }
   }
