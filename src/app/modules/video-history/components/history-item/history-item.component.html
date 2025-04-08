@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ historyItem.video_name }}</mat-card-title>
+    <mat-card-subtitle>
+      {{ historyItem.creation_date | date:'medium' }}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <button *ngIf="progressItem && progressItem.result != null" mat-button color="primary" (click)="showDescription(progressItem.result.markdown_response)" > <!-- [routerLink]="['/history', video.id]" -->
+      <mat-icon>visibility</mat-icon> Ver detalles
+    </button>
+  </mat-card-content>
+
+  <mat-progress-bar *ngIf="progressItem && progressItem.status == 'PROCESSING'" mode="indeterminate"></mat-progress-bar>
+</mat-card>
