@@ -66,10 +66,9 @@ export class UploadFormComponent {
       this.videoService.uploadVideo(videoFile).subscribe({
         next: () => {
           this.isUploading = false;
-          this.uploadForm.reset();                         // Limpia el formulario
-          this.fileInput.nativeElement.value = '';         // Limpia el input file visualmente
-          this.videoService.getHistory().subscribe();      // Recarga el historial
-          this.snackbar.open('Video cargado con éxito', 'Cerrar', { duration: 3000 });
+          this.uploadForm.reset();
+          this.fileInput.nativeElement.value = '';
+          this.videoService.getHistory().subscribe();      
         },error: ()=>{
           this.isUploading = false;
           this.snackbar.open('Error al cargar el vídeo', 'Cerrar', { duration: 3000 });

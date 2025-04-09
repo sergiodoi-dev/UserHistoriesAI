@@ -1,7 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { marked } from 'marked';
-
+import { Component} from '@angular/core';
 @Component({
   selector: 'app-markdown-viewer',
   imports: [],
@@ -9,5 +6,6 @@ import { marked } from 'marked';
   styleUrl: './markdown-viewer.component.scss'
 })
 export class MarkdownViewerComponent {
+  renderedContent: string = '';
 
 }
