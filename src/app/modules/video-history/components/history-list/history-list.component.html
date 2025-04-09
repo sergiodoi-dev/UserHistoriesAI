@@ -1,11 +1,6 @@
 <div class="history-container">
-  <mat-toolbar color="primary">
-    <span>Historial de Videos</span>
-    <span class="spacer"></span>
-  </mat-toolbar>
-
   <!-- Loaded State -->
-  <div *ngIf="!isLoading" class="video-list">
+  <div *ngIf="!isLoading" class="scrollable-list">
     <div *ngFor="let historyItem of dataSource.data" class="video-item">
       <app-history-item [historyItem]="historyItem"></app-history-item>
     </div>

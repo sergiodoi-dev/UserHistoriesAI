@@ -1,6 +1,6 @@
 <mat-card class="upload-card">
   <mat-card-header>
-    <mat-card-title>Subir nuevo video</mat-card-title>
+    <mat-card-title>Cargar nuevo video</mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
@@ -10,7 +10,7 @@
         <input type="file" accept="video/*" (change)="onFileSelected($event)" #fileInput hidden>
 
         <span class="file-name" *ngIf="!uploadForm.get('videoFile')?.value">
-          Selecciona el video a subir
+          Selecciona el video a cargar
         </span>
 
         <span class="file-name" *ngIf="uploadForm.get('videoFile')?.value">

@@ -7,10 +7,16 @@
   </mat-card-header>
 
   <mat-card-content>
-    <button *ngIf="showViewButton" mat-button color="primary" (click)="showDescription(progressItem!.result.markdown_response)" > <!-- [routerLink]="['/history', video.id]" -->
+    <button *ngIf="showViewButton" mat-button color="primary" (click)="showDescription(progressItem!.result.markdown_response)" >
       <mat-icon>visibility</mat-icon> Ver detalles
     </button>
   </mat-card-content>
 
-  <mat-progress-bar *ngIf="progressItem && progressItem.status == 'PROCESSING'" mode="indeterminate"></mat-progress-bar>
+  <!-- <mat-progress-bar *ngIf="progressItem && progressItem.status == 'PROCESSING'" mode="indeterminate"></mat-progress-bar> -->
+  <mat-progress-bar
+    *ngIf="progressItem"
+    [value]="progressItem.progress"
+    mode="determinate"
+    [color]="progressItem.status === 'SUCCESS' ? 'primary':'accent'">
+  </mat-progress-bar>
 </mat-card>

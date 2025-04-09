@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
@@ -28,6 +28,10 @@ import { VideoService } from '../../../../core/services/video.service';
   styleUrl: './upload-form.component.scss'
 })
 export class UploadFormComponent {
+
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+
+
   uploadForm: FormGroup;
   isUploading = false;
   progress = 0;
@@ -57,12 +61,20 @@ export class UploadFormComponent {
   onSubmit(): void {
     if (this.uploadForm.valid) {
       this.isUploading = true;
-      const { videoFile, description } = this.uploadForm.value;
+      const { videoFile } = this.uploadForm.value;
 
-      this.videoService.uploadVideo(videoFile).subscribe(response => {
-        this.isUploading = false;
-        this.videoService.getHistory().subscribe();
-      })
+      this.videoService.uploadVideo(videoFile).subscribe({
+        next: () => {
+          this.isUploading = false;
+          this.uploadForm.reset();                         // Limpia el formulario
+          this.fileInput.nativeElement.value = '';         // Limpia el input file visualmente
+          this.videoService.getHistory().subscribe();      // Recarga el historial
+          this.snackbar.open('Video cargado con éxito', 'Cerrar', { duration: 3000 });
+        },error: ()=>{
+          this.isUploading = false;
+          this.snackbar.open('Error al cargar el vídeo', 'Cerrar', { duration: 3000 });
+        }
+      });
     }
   }
 

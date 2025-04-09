@@ -1,15 +1,35 @@
-<div class="app-header">
-  <div class="header-content">
-    <div class="logo-container">
-      <div class="logo-mask">
-        <img src="assets\areamovil_logo.png" alt="Company Logo" class="company-logo">
+<div class="main-container">
+
+  <div class="app-header">
+    <div class="header-content">
+      <div class="logo-container">
+        <div class="logo-mask">
+          <img
+            src="assets/areamovil_logo.png"
+            alt="Company Logo"
+            class="company-logo"
+          />
+        </div>
+      </div>
+      <div class="title-container">
+        <h1 class="app-title">Historias de usuario IA</h1>
+        <div class="title-underline"></div>
       </div>
     </div>
-    <div class="title-container">
-      <h1 class="app-title">Historias de usuario IA</h1>
-      <div class="title-underline"></div>
+  </div>
+
+  <div class="app-body">
+    <app-upload-form></app-upload-form>
+
+    <mat-toolbar class="history-toolbar">
+      <span class="history-title">Historial de videos</span>
+      <span class="spacer"></span>
+    </mat-toolbar>
+
+    <div class="scrollable-history">
+      <app-history-list></app-history-list>
     </div>
   </div>
 </div>
-<app-upload-form></app-upload-form>
-<app-history-list></app-history-list>
+
+
